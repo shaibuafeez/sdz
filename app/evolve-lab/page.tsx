@@ -1,0 +1,487 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { ArrowLeft, Wallet, Zap, Flame, Dna, Scan, Activity, AlertTriangle, CheckCircle } from "lucide-react"
+import Image from "next/image"
+
+export default function EvolveLab() {
+  const [isWalletConnected, setIsWalletConnected] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [loadingMessage, setLoadingMessage] = useState("")
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [successMessage, setSuccessMessage] = useState("")
+
+  // Function to get the correct image based on level
+  const getArtifactImage = (level: number) => {
+    if (level >= 10) return "/images/level-10.png"
+    if (level >= 9) return "/images/level-09.png"
+    if (level >= 8) return "/images/level-08.png"
+    if (level >= 7) return "/images/level-07.png"
+    if (level >= 6) return "/images/level-06.png"
+    if (level >= 5) return "/images/level-05.png"
+    if (level >= 4) return "/images/level-04.png"
+    if (level >= 3) return "/images/level-03.png"
+    if (level >= 2) return "/images/level-02.png"
+    return "/images/level-01.png"
+  }
+
+  // Function to get evolution stage description
+  const getEvolutionStage = (level: number) => {
+    if (level >= 10) return { name: "ENTITY", color: "text-red-400", description: "MAXIMUM EVOLUTION REACHED" }
+    if (level >= 8) return { name: "UNSTABLE", color: "text-orange-400", description: "APPROACHING CRITICAL THRESHOLD" }
+    if (level >= 6) return { name: "SHADOW", color: "text-purple-400", description: "DARK TRANSFORMATION ACTIVE" }
+    if (level >= 4) return { name: "MYSTERIOUS", color: "text-blue-400", description: "GENETIC ANOMALIES DETECTED" }
+    if (level >= 2) return { name: "ENHANCED", color: "text-green-400", description: "EVOLUTION IN PROGRESS" }
+    return { name: "PURE", color: "text-cyan-400", description: "ORIGINAL GENETIC STATE" }
+  }
+
+  // Mock artifact data - single artifact
+  const artifact = {
+    id: 1337,
+    name: "MY SUDOZ DOG",
+    level: 2,
+    maxLevel: 10,
+    currentValue: 5,
+    rarity: 4,
+    dnaSequence: "DNA97/2309/57A2",
+    traitModules: ["ALPHA", "BETA", "GAMMA"],
+    mutationProbability: 87,
+    attributes: ["Green", "Rare", "Evolved"],
+  }
+
+  const [selectedArtifact, setSelectedArtifact] = useState(artifact)
+
+  const loadingMessages = [
+    "Initializing Artifact DNA…",
+    "Connecting to SUDOZ Lab Nodes…",
+    "Reading Genetic Memory…",
+    "Injecting Catalyst…",
+    "Trait Module Detected…",
+    "Mutation Probability Calculating…",
+    "Genetic Structure Analyzing…",
+    "Evolution Sequence Activated…",
+  ]
+
+  const successMessages = [
+    "Level Up Complete – New Trait Acquired",
+    "Mutation Successful – Artifact Enhanced",
+    "DNA Structure Enhanced – Trait Unlocked",
+    "Genetic Evolution Successful",
+    "Trait Module Successfully Integrated",
+  ]
+
+  const handleConnectWallet = () => {
+    setIsLoading(true)
+    setLoadingMessage("Connecting to SUDOZ Lab Nodes…")
+
+    setTimeout(() => {
+      setIsLoading(false)
+      setIsWalletConnected(true)
+      setSelectedArtifact(artifact)
+    }, 2000)
+  }
+
+  const handleLevelUp = () => {
+    if (selectedArtifact) {
+      setIsLoading(true)
+      let messageIndex = 0
+
+      const messageInterval = setInterval(() => {
+        if (messageIndex < loadingMessages.length) {
+          setLoadingMessage(loadingMessages[messageIndex])
+          messageIndex++
+        }
+      }, 800)
+
+      setTimeout(() => {
+        clearInterval(messageInterval)
+        setIsLoading(false)
+
+        const updatedArtifact = {
+          ...selectedArtifact,
+          level: Math.min(selectedArtifact.level + 1, selectedArtifact.maxLevel),
+          currentValue: selectedArtifact.currentValue + 2,
+          rarity: selectedArtifact.rarity + 1,
+          mutationProbability: Math.floor(Math.random() * 100) + 1,
+        }
+        setSelectedArtifact(updatedArtifact)
+
+        const randomSuccess = successMessages[Math.floor(Math.random() * successMessages.length)]
+        setSuccessMessage(`${randomSuccess} – Artifact Now Level ${updatedArtifact.level}`)
+        setShowSuccess(true)
+
+        setTimeout(() => setShowSuccess(false), 4000)
+      }, 6000)
+    }
+  }
+
+  const handleScanArtifact = () => {
+    setIsLoading(true)
+    setLoadingMessage("Scanning Artifact DNA Structure…")
+
+    setTimeout(() => {
+      setIsLoading(false)
+      setSuccessMessage("Artifact Scan Complete – All Systems Nominal")
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 3000)
+    }, 2000)
+  }
+
+  const currentStage = getEvolutionStage(selectedArtifact.level)
+  const currentImage = getArtifactImage(selectedArtifact.level)
+
+  return (
+    <TooltipProvider>
+      <div className="min-h-screen bg-black relative overflow-hidden">
+        {/* Moving animated background blurs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-400/15 rounded-full blur-3xl moving-blur-1"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl moving-blur-2"></div>
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-green-300/8 rounded-full blur-3xl moving-blur-3"></div>
+        </div>
+
+        {/* Header */}
+        <header className="relative z-10 flex items-center justify-between p-6">
+          <div className="flex items-center space-x-4">
+            <Link href="/">
+              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white tracking-wide">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                BACK
+              </Button>
+            </Link>
+            <div className="text-2xl font-bold text-green-400 tracking-wider">SUDOZ DNA LAB</div>
+          </div>
+
+          {!isWalletConnected ? (
+            <Button
+              onClick={handleConnectWallet}
+              disabled={isLoading}
+              className="bg-gray-800 hover:bg-gray-700 text-white rounded-full px-6 tracking-wide"
+            >
+              <Wallet className="w-4 h-4 mr-2" />
+              {isLoading ? "CONNECTING..." : "CONNECT WALLET"}
+            </Button>
+          ) : (
+            <Badge variant="secondary" className="bg-green-400/20 text-green-400 border-green-400/30 tracking-wide">
+              LAB ACCESS GRANTED
+            </Badge>
+          )}
+        </header>
+
+        {/* Loading Overlay */}
+        {isLoading && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 border-4 border-green-400/30 border-t-green-400 rounded-full animate-spin mb-4 mx-auto"></div>
+              <div className="text-green-400 text-lg font-bold tracking-wider mb-2">{loadingMessage}</div>
+              <Progress value={33} className="w-64 mx-auto" />
+            </div>
+          </div>
+        )}
+
+        {/* Success Message */}
+        {showSuccess && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+            <div className="bg-green-400/20 border border-green-400/40 rounded-xl p-4 flex items-center space-x-3">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span className="text-green-400 font-bold tracking-wide">{successMessage}</span>
+            </div>
+          </div>
+        )}
+
+        <main className="relative z-10 container mx-auto px-6 py-8">
+          {!isWalletConnected ? (
+            <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+              <div className="w-24 h-24 bg-gray-800/50 rounded-full flex items-center justify-center mb-6">
+                <Wallet className="w-12 h-12 text-gray-400" />
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-4 tracking-wider">LABORATORY ACCESS REQUIRED</h2>
+              <p className="text-gray-400 mb-8 max-w-md">
+                Connect your wallet to access the SUDOZ DNA Laboratory and begin genetic evolution protocols.
+              </p>
+              <Button
+                onClick={handleConnectWallet}
+                disabled={isLoading}
+                size="lg"
+                className="bg-green-400 hover:bg-green-500 text-black px-8 py-4 rounded-xl font-bold tracking-wider"
+              >
+                <Wallet className="w-5 h-5 mr-2" />
+                ACTIVATE LAB SEQUENCE
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-8">
+              {/* Main Title */}
+              <div className="text-center mb-8">
+                <h1 className="text-5xl font-bold text-white mb-4 tracking-wider">EVOLVE YOUR ARTIFACT</h1>
+                <p className="text-gray-300 text-lg tracking-wide">LEVEL PROTOCOL INTERFACE</p>
+              </div>
+
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* Artifact Info Panel */}
+                <div className="lg:col-span-1 space-y-6">
+                  {/* Artifact Display */}
+                  <Card className="bg-gray-900/80 border-green-400 shadow-lg shadow-green-400/20">
+                    <CardHeader>
+                      <CardTitle className="text-green-400 tracking-wider">ARTIFACT SPECIMEN</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-4">
+                      <div className="flex items-center space-x-3 mb-4">
+                        <div className="w-16 h-16 bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
+                          <Image
+                            src={currentImage || "/placeholder.svg"}
+                            alt={selectedArtifact.name}
+                            width={64}
+                            height={64}
+                            className="rounded-lg object-cover"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-white text-sm tracking-wide">{selectedArtifact.name}</h4>
+                          <p className="text-gray-400 text-xs tracking-wide">
+                            LEVEL {selectedArtifact.level}/{selectedArtifact.maxLevel}
+                          </p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <Badge variant="secondary" className="text-xs tracking-wide">
+                              DNA: {selectedArtifact.dnaSequence}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Evolution Stage */}
+                      <div className="mb-4 p-3 bg-gray-800/50 rounded-lg">
+                        <div className="text-xs text-gray-400 tracking-wide mb-1">EVOLUTION STAGE</div>
+                        <div className={`font-bold tracking-wider ${currentStage.color}`}>{currentStage.name}</div>
+                        <div className="text-xs text-gray-400 mt-1">{currentStage.description}</div>
+                      </div>
+
+                      <Button
+                        onClick={handleScanArtifact}
+                        disabled={isLoading}
+                        variant="outline"
+                        size="sm"
+                        className="w-full border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 tracking-wide"
+                      >
+                        <Scan className="w-4 h-4 mr-2" />
+                        SCAN ARTIFACT
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  {/* Genetic Data */}
+                  <Card className="bg-gray-900/80 border-gray-700">
+                    <CardHeader>
+                      <CardTitle className="text-cyan-400 tracking-wider flex items-center">
+                        <Dna className="w-5 h-5 mr-2" />
+                        GENETIC DATA
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div>
+                        <div className="text-sm text-gray-400 tracking-wide">MUTATION PROBABILITY</div>
+                        <div className="flex items-center space-x-2">
+                          <Progress value={selectedArtifact.mutationProbability} className="flex-1" />
+                          <span className="text-green-400 font-bold text-sm">
+                            {selectedArtifact.mutationProbability}%
+                          </span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="text-sm text-gray-400 tracking-wide mb-2">TRAIT MODULES</div>
+                        <div className="flex flex-wrap gap-1">
+                          {selectedArtifact.traitModules.map((trait, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs bg-purple-500/20 text-purple-400">
+                              {trait}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Experimental Chamber */}
+                <div className="lg:col-span-2">
+                  <Card className="bg-gray-900/80 border-gray-700 mb-6">
+                    <CardHeader>
+                      <CardTitle className="text-white tracking-wider text-center">EXPERIMENTAL CHAMBER</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center">
+                        <h2 className="text-3xl font-bold text-white mb-6 tracking-wider">{selectedArtifact.name}</h2>
+
+                        {/* Evolution Chamber */}
+                        <div className="relative mb-6">
+                          <div className="w-full max-w-md mx-auto">
+                            {/* Chamber container with proper aspect ratio */}
+                            <div className="relative aspect-square">
+                              <Image
+                                src={currentImage || "/placeholder.svg"}
+                                alt={selectedArtifact.name}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                priority
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-3 gap-4 mb-6">
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-white tracking-wider">
+                              {selectedArtifact.level}/{selectedArtifact.maxLevel}
+                            </div>
+                            <div className="text-gray-400 text-xs tracking-wider">EVOLUTION LEVEL</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-white tracking-wider">
+                              {selectedArtifact.currentValue}
+                            </div>
+                            <div className="text-gray-400 text-xs tracking-wider">GENETIC VALUE</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-white tracking-wider">{selectedArtifact.rarity}</div>
+                            <div className="text-gray-400 text-xs tracking-wider">RARITY INDEX</div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Genetic Upgrade Console */}
+                  <Card className="bg-gray-900/80 border-gray-700">
+                    <CardHeader>
+                      <CardTitle className="text-yellow-400 tracking-wider flex items-center">
+                        <Activity className="w-5 h-5 mr-2" />
+                        GENETIC UPGRADE CONSOLE
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {selectedArtifact.level >= selectedArtifact.maxLevel ? (
+                        <div className="space-y-4">
+                          <div className="p-4 bg-red-400/10 border border-red-400/30 rounded-xl flex items-center space-x-3">
+                            <AlertTriangle className="w-6 h-6 text-red-400" />
+                            <div>
+                              <div className="text-red-400 font-bold tracking-wide">
+                                WARNING: UNSTABLE EVOLUTION THRESHOLD
+                              </div>
+                              <div className="text-gray-400 text-sm">
+                                Artifact has reached maximum evolution capacity
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="text-center space-y-4">
+                            <p className="text-yellow-400 font-bold tracking-wide">
+                              LEVEL 11: ARTIFACT WILL BURN AND REBIRTH WILL BEGIN
+                            </p>
+                            <p className="text-gray-300">You are about to unlock a SUDOZ Entity</p>
+
+                            <Button
+                              variant="outline"
+                              size="lg"
+                              className="border-red-400/50 text-red-400 hover:bg-red-400/10 hover:border-red-400 px-8 py-4 rounded-xl font-bold tracking-wider"
+                            >
+                              <Flame className="w-5 h-5 mr-2" />
+                              TRIGGER REBIRTH PROTOCOL
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  onClick={handleLevelUp}
+                                  disabled={isLoading}
+                                  size="lg"
+                                  className="bg-green-400 hover:bg-green-500 text-black px-6 py-4 rounded-xl font-bold tracking-wider"
+                                >
+                                  <Zap className="w-5 h-5 mr-2" />
+                                  START EVOLUTION
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Evolution costs 1 SUI per level</p>
+                                <p>Each level grants a new mysterious trait</p>
+                              </TooltipContent>
+                            </Tooltip>
+
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  onClick={handleLevelUp}
+                                  disabled={isLoading}
+                                  variant="outline"
+                                  size="lg"
+                                  className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                                >
+                                  <Dna className="w-5 h-5 mr-2" />
+                                  APPLY MUTATION
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Randomness governs the trait outcome</p>
+                                <p>Artifacts can evolve up to level 10</p>
+                              </TooltipContent>
+                            </Tooltip>
+
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  onClick={handleLevelUp}
+                                  disabled={isLoading}
+                                  variant="outline"
+                                  size="lg"
+                                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                                >
+                                  <Activity className="w-5 h-5 mr-2" />
+                                  TRIGGER UPGRADE
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Once level 10 is reached, evolution ends and rebirth begins</p>
+                                <p>Leveling too far... may have consequences</p>
+                              </TooltipContent>
+                            </Tooltip>
+
+                            <Button
+                              disabled={isLoading}
+                              variant="outline"
+                              size="lg"
+                              className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                            >
+                              <Zap className="w-5 h-5 mr-2" />
+                              RELEASE TRAIT
+                            </Button>
+                          </div>
+
+                          <div className="text-center text-sm text-gray-400 space-y-1">
+                            <p>• Artifacts can evolve up to level 10</p>
+                            <p>• Each level grants a new mysterious trait</p>
+                            <p>• Evolution costs 1 SUI per level</p>
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
+    </TooltipProvider>
+  )
+}
