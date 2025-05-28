@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { ArrowLeft, Wallet, Zap, Flame, Dna, Scan, Activity, AlertTriangle, CheckCircle } from "lucide-react"
+import { ArrowLeft, Wallet, Zap, Flame, Dna, Scan, Activity, AlertTriangle, CheckCircle, ArrowUpCircle } from "lucide-react"
 import Image from "next/image"
 
 export default function EvolveLab() {
@@ -131,6 +131,29 @@ export default function EvolveLab() {
       setShowSuccess(true)
       setTimeout(() => setShowSuccess(false), 3000)
     }, 2000)
+  }
+
+  const handleBurnSystem = () => {
+    setIsLoading(true)
+    setLoadingMessage("Activating Burn System…")
+    setTimeout(() => {
+      setIsLoading(false)
+      setSuccessMessage("Artifact Burned – Entered Special Event!")
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 4000)
+    }, 3000)
+  }
+
+  const handleMaxLevelUpgrade = () => {
+    setIsLoading(true)
+    setLoadingMessage("Upgrading to Max Level…")
+    setTimeout(() => {
+      setIsLoading(false)
+      setSelectedArtifact({ ...selectedArtifact, level: selectedArtifact.maxLevel })
+      setSuccessMessage("Artifact Upgraded to Max Level (10) Instantly!")
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 4000)
+    }, 3000)
   }
 
   const currentStage = getEvolutionStage(selectedArtifact.level)
@@ -440,31 +463,39 @@ export default function EvolveLab() {
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
-                                  onClick={handleLevelUp}
+                                  onClick={handleBurnSystem}
                                   disabled={isLoading}
                                   variant="outline"
                                   size="lg"
-                                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                                  className="border-red-400/50 text-red-400 hover:bg-red-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
                                 >
-                                  <Activity className="w-5 h-5 mr-2" />
-                                  TRIGGER UPGRADE
+                                  <Flame className="w-5 h-5 mr-2" />
+                                  BURN SYSTEM
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Once level 10 is reached, evolution ends and rebirth begins</p>
-                                <p>Leveling too far... may have consequences</p>
+                                <p>Burn your artifact for a chance at special rewards or events</p>
                               </TooltipContent>
                             </Tooltip>
 
-                            <Button
-                              disabled={isLoading}
-                              variant="outline"
-                              size="lg"
-                              className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
-                            >
-                              <Zap className="w-5 h-5 mr-2" />
-                              RELEASE TRAIT
-                            </Button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  onClick={handleMaxLevelUpgrade}
+                                  disabled={isLoading}
+                                  variant="outline"
+                                  size="lg"
+                                  className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                                >
+                                  <ArrowUpCircle className="w-5 h-5 mr-2" />
+                                  MAX LEVEL UPGRADE
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Instantly upgrade your artifact to level 10</p>
+                                <p>Costs may apply</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
 
                           <div className="text-center text-sm text-gray-400 space-y-1">

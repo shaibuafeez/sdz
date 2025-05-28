@@ -1,15 +1,32 @@
 import type React from "react"
-import type { Metadata } from "next/font/google"
+import type { Metadata } from "next"
 import { Orbitron } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 const orbitron = Orbitron({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Sudoz Evolution Lab",
-  description:
-    "Evolve your Sudoz NFTs in our experimental sci-fi lab. Level up, enhance, and unlock the true potential of your digital artifacts.",
-    generator: 'v0.dev'
+  description: "Evolve your Sudoz NFTs in our experimental sci-fi lab. Level up, enhance, and unlock the true potential of your digital artifacts.",
+  keywords: ["NFT", "Evolution", "Digital Art", "Blockchain", "Sudoz"],
+  authors: [{ name: "Sudoz Team" }],
+  viewport: "width=device-width, initial-scale=1",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://sudoz.io",
+    title: "Sudoz Evolution Lab",
+    description: "Evolve your Sudoz NFTs in our experimental sci-fi lab",
+    siteName: "Sudoz Evolution Lab"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sudoz Evolution Lab",
+    description: "Evolve your Sudoz NFTs in our experimental sci-fi lab",
+    creator: "@sudoz"
+  }
 }
 
 export default function RootLayout({
@@ -18,8 +35,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={orbitron.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={orbitron.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

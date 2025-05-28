@@ -40,90 +40,88 @@ export default function HomePage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 flex items-center justify-between p-6">
-        <div className="text-3xl font-bold text-green-400 tracking-wider">SUDOZ</div>
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/evolve-lab" className="text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+      <header className="relative z-10 flex items-center justify-between px-4 py-3 md:p-6">
+        <div className="text-xl md:text-3xl font-bold text-green-400 tracking-wider">SUDOZ</div>
+        <nav className="flex items-center space-x-3 md:space-x-8">
+          <Link href="/evolve-lab" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
             EVOLVE LAB
           </Link>
-          <Link href="/collection" className="text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+          <Link href="/collection" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
             COLLECTION
           </Link>
-          <Link href="/docs" className="text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+          <Link href="/vault" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+            VAULT
+          </Link>
+          <Link href="/docs" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
             DOCS
           </Link>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <div className="mb-12">
-          <div className="inline-flex items-center px-6 py-3 bg-green-400/20 border border-green-400/40 rounded-full text-green-400 text-lg mb-8 tracking-wider">
-            <Beaker className="w-5 h-5 mr-3" />
+      <section className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] px-2 md:px-6 text-center">
+        <div className="mb-6 md:mb-12">
+          <div className="inline-flex items-center px-3 py-1.5 md:px-6 md:py-3 bg-green-400/20 border border-green-400/40 rounded-full text-green-400 text-xs md:text-lg mb-4 md:mb-8 tracking-wider">
+            <Beaker className="w-3 h-3 md:w-5 md:h-5 mr-1.5 md:mr-3" />
             CLASSIFIED GENETIC RESEARCH FACILITY
           </div>
-
-          <h1 className="text-7xl md:text-9xl font-bold text-white mb-8 leading-tight tracking-wider">
+          <h1 className="text-3xl md:text-7xl font-bold text-white mb-4 md:mb-8 leading-tight tracking-wider">
             THE FUTURE OF
             <span className="block text-green-400 relative">
               EVOLUTION
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-green-400/30 rounded-full blur-lg pulse-neon"></div>
+              <div className="absolute -top-2 md:-top-4 -right-2 md:-right-4 w-4 md:w-8 h-4 md:h-8 bg-green-400/30 rounded-full blur-lg pulse-neon"></div>
             </span>
           </h1>
-
-          <p className="text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xs md:text-2xl text-gray-300 max-w-xs md:max-w-4xl mx-auto mb-6 md:mb-12 leading-relaxed">
             Deep within the SUDOZ laboratories, a breakthrough in digital genetics has emerged. Your NFTs are no longer
             static artifacts—they are <span className="text-green-400 font-bold">living entities</span>
             capable of evolution, mutation, and transcendence beyond imagination.
           </p>
-
-          <div className="flex items-center justify-center space-x-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
             <Badge
               variant="secondary"
-              className="bg-red-500/20 text-red-400 border-red-400/30 px-4 py-2 text-lg tracking-wider"
+              className="bg-red-500/20 text-red-400 border-red-400/30 px-3 py-1 text-xs md:text-lg tracking-wider"
             >
-              <AlertTriangle className="w-4 h-4 mr-2" />
+              <AlertTriangle className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
               EXPERIMENTAL
             </Badge>
             <Badge
               variant="secondary"
-              className="bg-purple-500/20 text-purple-400 border-purple-400/30 px-4 py-2 text-lg tracking-wider"
+              className="bg-purple-500/20 text-purple-400 border-purple-400/30 px-3 py-1 text-xs md:text-lg tracking-wider"
             >
-              <Dna className="w-4 h-4 mr-2" />
+              <Dna className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
               GENETIC MODIFICATION
             </Badge>
             <Badge
               variant="secondary"
-              className="bg-cyan-500/20 text-cyan-400 border-cyan-400/30 px-4 py-2 text-lg tracking-wider"
+              className="bg-cyan-500/20 text-cyan-400 border-cyan-400/30 px-3 py-1 text-xs md:text-lg tracking-wider"
             >
-              <Activity className="w-4 h-4 mr-2" />
+              <Activity className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
               LIVE EVOLUTION
             </Badge>
           </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-6 mb-16">
-          <Link href="/evolve-lab">
-            <Button
-              size="lg"
-              className="bg-green-400 hover:bg-green-500 text-black px-12 py-6 text-xl font-bold rounded-xl shadow-lg shadow-green-400/25 transition-all duration-300 hover:shadow-green-400/40 hover:scale-105 tracking-wider"
-            >
-              <Zap className="w-6 h-6 mr-3" />
-              ENTER THE LAB
-              <ArrowRight className="w-6 h-6 ml-3" />
-            </Button>
-          </Link>
-
-          <Link href="/collection">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300 px-12 py-6 text-xl font-bold rounded-xl transition-all duration-300 hover:scale-105 tracking-wider"
-            >
-              <Sparkles className="w-6 h-6 mr-3" />
-              EXPLORE SPECIMENS
-            </Button>
-          </Link>
+          <div className="flex flex-col gap-2 md:flex-row md:gap-6 mb-4 md:mb-16 w-full max-w-xs md:max-w-none mx-auto">
+            <Link href="/evolve-lab" className="block w-full">
+              <Button
+                size="lg"
+                className="w-full bg-green-400 hover:bg-green-500 text-black px-4 md:px-12 py-3 md:py-6 text-base md:text-xl font-bold rounded-xl shadow-lg shadow-green-400/25 transition-all duration-300 hover:shadow-green-400/40 hover:scale-105 tracking-wider"
+              >
+                <Zap className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
+                ENTER THE LAB
+                <ArrowRight className="w-4 h-4 md:w-6 md:h-6 ml-2 md:ml-3" />
+              </Button>
+            </Link>
+            <Link href="/collection" className="block w-full">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300 px-4 md:px-12 py-3 md:py-6 text-base md:text-xl font-bold rounded-xl transition-all duration-300 hover:scale-105 tracking-wider"
+              >
+                <Sparkles className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
+                EXPLORE SPECIMENS
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Scroll indicator */}
@@ -135,46 +133,41 @@ export default function HomePage() {
       </section>
 
       {/* The Discovery Section */}
-      <section className="relative z-10 py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <h2 className="text-6xl font-bold text-white mb-8 tracking-wider">THE DISCOVERY</h2>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              In the depths of blockchain technology, SUDOZ scientists have unlocked the secret to digital DNA
-              manipulation. What was once impossible is now reality—NFTs that grow, evolve, and transform before your
-              eyes.
+      <section className="relative z-10 py-8 md:py-32 px-2 md:px-6">
+        <div className="container mx-auto max-w-lg md:max-w-6xl">
+          <div className="text-center mb-8 md:mb-20">
+            <h2 className="text-2xl md:text-6xl font-bold text-white mb-4 md:mb-8 tracking-wider">THE DISCOVERY</h2>
+            <p className="text-xs md:text-xl text-gray-300 max-w-xs md:max-w-4xl mx-auto leading-relaxed">
+              In the depths of blockchain technology, SUDOZ scientists have unlocked the secret to digital DNA manipulation. What was once impossible is now reality—NFTs that grow, evolve, and transform before your eyes.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center mb-8 md:mb-20">
             <div>
-              <h3 className="text-4xl font-bold text-green-400 mb-6 tracking-wider">GENETIC BREAKTHROUGH</h3>
-              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                Each SUDOZ artifact contains a unique genetic code—a digital DNA sequence that determines its traits,
-                rarity, and evolutionary potential. Through our proprietary Level Protocol Interface, you can now
-                manipulate this code directly.
+              <h3 className="text-lg md:text-4xl font-bold text-green-400 mb-3 md:mb-6 tracking-wider">GENETIC BREAKTHROUGH</h3>
+              <p className="text-xs md:text-lg text-gray-300 mb-3 md:mb-6 leading-relaxed">
+                Each SUDOZ artifact contains a unique genetic code—a digital DNA sequence that determines its traits, rarity, and evolutionary potential. Through our proprietary Level Protocol Interface, you can now manipulate this code directly.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
+              <div className="space-y-2 md:space-y-4">
+                <div className="flex items-center space-x-2 md:space-x-3">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-gray-300">10 Evolution Levels Per Artifact</span>
+                  <span className="text-xs md:text-base text-gray-300">10 Evolution Levels Per Artifact</span>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 md:space-x-3">
                   <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                  <span className="text-gray-300">Randomized Trait Generation</span>
+                  <span className="text-xs md:text-base text-gray-300">Randomized Trait Generation</span>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 md:space-x-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <span className="text-gray-300">Irreversible Genetic Changes</span>
+                  <span className="text-xs md:text-base text-gray-300">Irreversible Genetic Changes</span>
                 </div>
               </div>
             </div>
             <div className="relative">
-              <div className="w-full h-80 bg-gray-900/50 rounded-xl border border-green-400/30 flex items-center justify-center">
+              <div className="w-full h-40 md:h-80 bg-gray-900/50 rounded-xl border border-green-400/30 flex items-center justify-center">
                 <div className="text-center">
-                  <Dna className="w-24 h-24 text-green-400 mx-auto mb-4 animate-pulse" />
-                  <div className="text-green-400 font-bold tracking-wider">DNA SEQUENCE ACTIVE</div>
-                  <div className="text-gray-400 text-sm mt-2">GENETIC CODE: DNA97/2309/57A2</div>
+                  <Dna className="w-10 h-10 md:w-24 md:h-24 text-green-400 mx-auto mb-2 md:mb-4 animate-pulse" />
+                  <div className="text-green-400 font-bold tracking-wider text-xs md:text-base">DNA SEQUENCE ACTIVE</div>
+                  <div className="text-gray-400 text-xs md:text-sm mt-1 md:mt-2">GENETIC CODE: DNA97/2309/57A2</div>
                 </div>
               </div>
             </div>
@@ -183,27 +176,24 @@ export default function HomePage() {
       </section>
 
       {/* Evolution Process Section */}
-      <section className="relative z-10 py-32 px-6 bg-gray-900/20">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <h2 className="text-6xl font-bold text-white mb-8 tracking-wider">THE EVOLUTION PROCESS</h2>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Witness the impossible as your digital companions transcend their original form through controlled genetic
-              manipulation and evolutionary enhancement protocols.
+      <section className="relative z-10 py-8 md:py-32 px-2 md:px-6 bg-gray-900/20">
+        <div className="container mx-auto max-w-lg md:max-w-6xl">
+          <div className="text-center mb-8 md:mb-20">
+            <h2 className="text-2xl md:text-6xl font-bold text-white mb-4 md:mb-8 tracking-wider">THE EVOLUTION PROCESS</h2>
+            <p className="text-xs md:text-xl text-gray-300 max-w-xs md:max-w-4xl mx-auto leading-relaxed">
+              Witness the impossible as your digital companions transcend their original form through controlled genetic manipulation and evolutionary enhancement protocols.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
-            <Card className="bg-gray-900/80 backdrop-blur-sm border border-green-400/30 rounded-xl p-8 hover:border-green-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-green-400/10">
-              <div className="w-16 h-16 bg-green-400/20 rounded-lg flex items-center justify-center mb-6">
-                <Zap className="w-8 h-8 text-green-400" />
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-20">
+            <Card className="bg-gray-900/80 backdrop-blur-sm border border-green-400/30 rounded-xl p-4 md:p-8 hover:border-green-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-green-400/10">
+              <div className="w-8 h-8 md:w-16 md:h-16 bg-green-400/20 rounded-lg flex items-center justify-center mb-3 md:mb-6">
+                <Zap className="w-5 h-5 md:w-8 md:h-8 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">LEVEL UP PROTOCOL</h3>
-              <p className="text-gray-400 mb-6">
-                Each evolution costs exactly 1 SUI and unlocks new genetic traits. Your artifact's DNA structure becomes
-                more complex with every level gained.
+              <h3 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-4 tracking-wide">LEVEL UP PROTOCOL</h3>
+              <p className="text-xs md:text-base text-gray-400 mb-3 md:mb-6">
+                Each evolution costs exactly 1 SUI and unlocks new genetic traits. Your artifact's DNA structure becomes more complex with every level gained.
               </p>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1 md:space-y-2 text-xs md:text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Cost per Level:</span>
                   <span className="text-green-400 font-bold">1 SUI</span>
@@ -218,17 +208,15 @@ export default function HomePage() {
                 </div>
               </div>
             </Card>
-
-            <Card className="bg-gray-900/80 backdrop-blur-sm border border-cyan-400/30 rounded-xl p-8 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/10">
-              <div className="w-16 h-16 bg-cyan-400/20 rounded-lg flex items-center justify-center mb-6">
-                <Beaker className="w-8 h-8 text-cyan-400" />
+            <Card className="bg-gray-900/80 backdrop-blur-sm border border-cyan-400/30 rounded-xl p-4 md:p-8 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/10">
+              <div className="w-8 h-8 md:w-16 md:h-16 bg-cyan-400/20 rounded-lg flex items-center justify-center mb-3 md:mb-6">
+                <Beaker className="w-5 h-5 md:w-8 md:h-8 text-cyan-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">EXPERIMENTAL CHAMBER</h3>
-              <p className="text-gray-400 mb-6">
-                Our state-of-the-art evolution chambers provide the perfect environment for genetic transformation. Each
-                session is monitored by advanced AI systems.
+              <h3 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-4 tracking-wide">EXPERIMENTAL CHAMBER</h3>
+              <p className="text-xs md:text-base text-gray-400 mb-3 md:mb-6">
+                Our state-of-the-art evolution chambers provide the perfect environment for genetic transformation. Each session is monitored by advanced AI systems.
               </p>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1 md:space-y-2 text-xs md:text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Success Rate:</span>
                   <span className="text-cyan-400 font-bold">100%</span>
@@ -243,17 +231,15 @@ export default function HomePage() {
                 </div>
               </div>
             </Card>
-
-            <Card className="bg-gray-900/80 backdrop-blur-sm border border-purple-400/30 rounded-xl p-8 hover:border-purple-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-400/10">
-              <div className="w-16 h-16 bg-purple-400/20 rounded-lg flex items-center justify-center mb-6">
-                <Sparkles className="w-8 h-8 text-purple-400" />
+            <Card className="bg-gray-900/80 backdrop-blur-sm border border-purple-400/30 rounded-xl p-4 md:p-8 hover:border-purple-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-400/10">
+              <div className="w-8 h-8 md:w-16 md:h-16 bg-purple-400/20 rounded-lg flex items-center justify-center mb-3 md:mb-6">
+                <Sparkles className="w-5 h-5 md:w-8 md:h-8 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">REBIRTH PROTOCOL</h3>
-              <p className="text-gray-400 mb-6">
-                Beyond Level 10 lies the ultimate transformation—rebirth into a SUDOZ Entity. This process is
-                irreversible and unlocks unprecedented power.
+              <h3 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-4 tracking-wide">REBIRTH PROTOCOL</h3>
+              <p className="text-xs md:text-base text-gray-400 mb-3 md:mb-6">
+                Beyond Level 10 lies the ultimate transformation—rebirth into a SUDOZ Entity. This process is irreversible and unlocks unprecedented power.
               </p>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1 md:space-y-2 text-xs md:text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Trigger Level:</span>
                   <span className="text-purple-400 font-bold">11+</span>
