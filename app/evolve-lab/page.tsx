@@ -9,13 +9,16 @@ import { Progress } from "@/components/ui/progress"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowLeft, Wallet, Zap, Flame, Dna, Scan, Activity, AlertTriangle, CheckCircle, ArrowUpCircle } from "lucide-react"
 import Image from "next/image"
+import WalletConnect from "../components/WalletConnect"
+import { useCurrentAccount } from "@mysten/dapp-kit"
 
 export default function EvolveLab() {
-  const [isWalletConnected, setIsWalletConnected] = useState(false)
+  const account = useCurrentAccount();
   const [isLoading, setIsLoading] = useState(false)
   const [loadingMessage, setLoadingMessage] = useState("")
   const [showSuccess, setShowSuccess] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
+  const [pendingMutations, setPendingMutations] = useState(0)
 
   // Function to get the correct image based on level
   const getArtifactImage = (level: number) => {
@@ -76,33 +79,26 @@ export default function EvolveLab() {
     "Trait Module Successfully Integrated",
   ]
 
-  const handleConnectWallet = () => {
-    setIsLoading(true)
-    setLoadingMessage("Connecting to SUDOZ Lab Nodes…")
-
-    setTimeout(() => {
-      setIsLoading(false)
-      setIsWalletConnected(true)
-      setSelectedArtifact(artifact)
-    }, 2000)
+  const handleStartEvolution = () => {
+    if (selectedArtifact.level + pendingMutations < selectedArtifact.maxLevel) {
+      setPendingMutations(pendingMutations + 1)
+    }
   }
 
-  const handleLevelUp = () => {
-    if (selectedArtifact) {
+  const handleApplyMutation = () => {
+    if (pendingMutations > 0 && selectedArtifact.level < selectedArtifact.maxLevel) {
       setIsLoading(true)
       let messageIndex = 0
-
       const messageInterval = setInterval(() => {
         if (messageIndex < loadingMessages.length) {
           setLoadingMessage(loadingMessages[messageIndex])
           messageIndex++
         }
       }, 800)
-
       setTimeout(() => {
         clearInterval(messageInterval)
         setIsLoading(false)
-
+        setPendingMutations(pendingMutations - 1)
         const updatedArtifact = {
           ...selectedArtifact,
           level: Math.min(selectedArtifact.level + 1, selectedArtifact.maxLevel),
@@ -111,11 +107,9 @@ export default function EvolveLab() {
           mutationProbability: Math.floor(Math.random() * 100) + 1,
         }
         setSelectedArtifact(updatedArtifact)
-
         const randomSuccess = successMessages[Math.floor(Math.random() * successMessages.length)]
         setSuccessMessage(`${randomSuccess} – Artifact Now Level ${updatedArtifact.level}`)
         setShowSuccess(true)
-
         setTimeout(() => setShowSuccess(false), 4000)
       }, 6000)
     }
@@ -181,15 +175,8 @@ export default function EvolveLab() {
             <div className="text-2xl font-bold text-green-400 tracking-wider">SUDOZ DNA LAB</div>
           </div>
 
-          {!isWalletConnected ? (
-            <Button
-              onClick={handleConnectWallet}
-              disabled={isLoading}
-              className="bg-gray-800 hover:bg-gray-700 text-white rounded-full px-6 tracking-wide"
-            >
-              <Wallet className="w-4 h-4 mr-2" />
-              {isLoading ? "CONNECTING..." : "CONNECT WALLET"}
-            </Button>
+          {!account ? (
+            <WalletConnect />
           ) : (
             <Badge variant="secondary" className="bg-green-400/20 text-green-400 border-green-400/30 tracking-wide">
               LAB ACCESS GRANTED
@@ -219,7 +206,7 @@ export default function EvolveLab() {
         )}
 
         <main className="relative z-10 container mx-auto px-6 py-8">
-          {!isWalletConnected ? (
+          {!account ? (
             <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
               <div className="w-24 h-24 bg-gray-800/50 rounded-full flex items-center justify-center mb-6">
                 <Wallet className="w-12 h-12 text-gray-400" />
@@ -228,15 +215,7 @@ export default function EvolveLab() {
               <p className="text-gray-400 mb-8 max-w-md">
                 Connect your wallet to access the SUDOZ DNA Laboratory and begin genetic evolution protocols.
               </p>
-              <Button
-                onClick={handleConnectWallet}
-                disabled={isLoading}
-                size="lg"
-                className="bg-green-400 hover:bg-green-500 text-black px-8 py-4 rounded-xl font-bold tracking-wider"
-              >
-                <Wallet className="w-5 h-5 mr-2" />
-                ACTIVATE LAB SEQUENCE
-              </Button>
+              <WalletConnect />
             </div>
           ) : (
             <div className="space-y-8">
@@ -426,8 +405,8 @@ export default function EvolveLab() {
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
-                                  onClick={handleLevelUp}
-                                  disabled={isLoading}
+                                  onClick={handleStartEvolution}
+                                  disabled={isLoading || selectedArtifact.level + pendingMutations >= selectedArtifact.maxLevel}
                                   size="lg"
                                   className="bg-green-400 hover:bg-green-500 text-black px-6 py-4 rounded-xl font-bold tracking-wider"
                                 >
@@ -444,14 +423,19 @@ export default function EvolveLab() {
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
-                                  onClick={handleLevelUp}
-                                  disabled={isLoading}
+                                  onClick={handleApplyMutation}
+                                  disabled={isLoading || pendingMutations === 0}
                                   variant="outline"
                                   size="lg"
-                                  className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
+                                  className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 px-6 py-4 rounded-xl font-bold tracking-wider relative"
                                 >
                                   <Dna className="w-5 h-5 mr-2" />
                                   APPLY MUTATION
+                                  {pendingMutations > 0 && (
+                                    <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-bold bg-purple-500 text-white animate-pulse">
+                                      {pendingMutations}
+                                    </span>
+                                  )}
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>

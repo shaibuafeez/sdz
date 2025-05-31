@@ -79,26 +79,7 @@ export default function Docs() {
                 </ul>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-green-400/10 border border-green-400/30 p-4 rounded-lg">
-                  <h5 className="text-green-400 font-bold mb-2 tracking-wide">BENEFITS PER LEVEL:</h5>
-                  <ul className="text-sm space-y-1">
-                    <li>• +2 Current Value</li>
-                    <li>• +1 Rarity Score</li>
-                    <li>• Visual enhancements</li>
-                    <li>• Potential new traits</li>
-                  </ul>
-                </div>
-                <div className="bg-cyan-400/10 border border-cyan-400/30 p-4 rounded-lg">
-                  <h5 className="text-cyan-400 font-bold mb-2 tracking-wide">LEVEL MILESTONES:</h5>
-                  <ul className="text-sm space-y-1">
-                    <li>• Level 3: Rare tier</li>
-                    <li>• Level 6: Epic tier</li>
-                    <li>• Level 9: Legendary tier</li>
-                    <li>• Level 10: Mythic tier</li>
-                  </ul>
-                </div>
-              </div>
+           
             </CardContent>
           </Card>
 
@@ -128,7 +109,7 @@ export default function Docs() {
                   <li>Special event participation</li>
                   <li>Exclusive reward claiming</li>
                   <li>Collection evolution mechanics</li>
-                  <li>Community governance voting</li>
+                  
                 </ul>
               </div>
             </CardContent>
@@ -170,13 +151,8 @@ export default function Docs() {
                       <span className="text-cyan-400 font-bold tracking-wide">+2 VALUE</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>RARITY BOOST:</span>
-                      <span className="text-green-400 font-bold tracking-wide">+1 PER LEVEL</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>MAX LEVEL BONUS:</span>
-                      <span className="text-yellow-400 font-bold tracking-wide">SPECIAL TRAITS</span>
-                    </div>
+                    
+            </div>
                   </div>
                 </div>
               </div>
@@ -247,12 +223,7 @@ export default function Docs() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-gray-300 space-y-6">
-              <div>
-                <h4 className="text-white font-bold mb-2 tracking-wide">CAN I DOWNGRADE MY ARTIFACT?</h4>
-                <p className="text-sm">
-                  No, all upgrades are permanent. Once you level up an artifact, it cannot be reverted to a lower level.
-                </p>
-              </div>
+           
 
               <div>
                 <h4 className="text-white font-bold mb-2 tracking-wide">WHAT HAPPENS IF I REACH MAX LEVEL?</h4>

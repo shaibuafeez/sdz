@@ -1,8 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Orbitron } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
+import "@mysten/dapp-kit/dist/index.css"
+import ClientProviders from "./providers"
 
 const orbitron = Orbitron({ subsets: ["latin"] })
 
@@ -37,14 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={orbitron.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+        <ClientProviders>
           {children}
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   )

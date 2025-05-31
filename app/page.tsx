@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -14,9 +16,13 @@ import {
   TrendingUp,
   Eye,
   AlertTriangle,
+  Menu,
 } from "lucide-react"
+import { useState } from "react"
 
 export default function HomePage() {
+  const [navOpen, setNavOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Moving animated background blurs */}
@@ -41,18 +47,30 @@ export default function HomePage() {
 
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between px-4 py-3 md:p-6">
-        <div className="text-xl md:text-3xl font-bold text-green-400 tracking-wider">SUDOZ</div>
-        <nav className="flex items-center space-x-3 md:space-x-8">
-          <Link href="/evolve-lab" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+        <div className="text-xl md:text-3xl font-bold text-green-400 tracking-wider flex items-center">
+          SUDOZ
+          <span className="ml-1 text-xs md:text-base font-normal text-green-400 hidden sm:inline">EVOLVE LAB</span>
+        </div>
+        <div className="md:hidden">
+          <button onClick={() => setNavOpen(!navOpen)} className="text-green-400 focus:outline-none z-50">
+            <Menu className="w-7 h-7" />
+          </button>
+        </div>
+        {/* Mobile nav overlay */}
+        {navOpen && <div className="fixed inset-0 bg-black z-40 md:hidden" onClick={() => setNavOpen(false)}></div>}
+        {/* Nav menu */}
+        <nav className={`fixed top-0 left-0 w-full h-full bg-black z-50 flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-green-400 transition-transform duration-300 md:static md:bg-transparent md:flex md:flex-row md:items-center md:justify-end md:space-y-0 md:space-x-8 md:text-base md:font-normal ${navOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'} md:translate-x-0 md:pointer-events-auto`}>
+          <button onClick={() => setNavOpen(false)} className="absolute top-6 right-6 text-white md:hidden">✕</button>
+          <Link href="/evolve-lab" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
             EVOLVE LAB
           </Link>
-          <Link href="/collection" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+          <Link href="/collection" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
             COLLECTION
           </Link>
-          <Link href="/vault" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+          <Link href="/vault" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
             VAULT
           </Link>
-          <Link href="/docs" className="text-xs md:text-base text-gray-300 hover:text-green-400 transition-colors tracking-wide">
+          <Link href="/docs" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
             DOCS
           </Link>
         </nav>
@@ -66,9 +84,9 @@ export default function HomePage() {
             CLASSIFIED GENETIC RESEARCH FACILITY
           </div>
           <h1 className="text-3xl md:text-7xl font-bold text-white mb-4 md:mb-8 leading-tight tracking-wider">
-            THE FUTURE OF
+            THE SUDOZ
             <span className="block text-green-400 relative">
-              EVOLUTION
+              COLLECTION
               <div className="absolute -top-2 md:-top-4 -right-2 md:-right-4 w-4 md:w-8 h-4 md:h-8 bg-green-400/30 rounded-full blur-lg pulse-neon"></div>
             </span>
           </h1>
@@ -319,23 +337,7 @@ export default function HomePage() {
             cannot predict or control.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="p-6 bg-gray-900/50 border border-red-400/30 rounded-xl">
-              <Shield className="w-8 h-8 text-red-400 mx-auto mb-4" />
-              <h4 className="text-lg font-bold text-white mb-2 tracking-wide">IRREVERSIBLE CHANGES</h4>
-              <p className="text-gray-400 text-sm">All genetic modifications are permanent and cannot be undone</p>
-            </div>
-            <div className="p-6 bg-gray-900/50 border border-yellow-400/30 rounded-xl">
-              <Activity className="w-8 h-8 text-yellow-400 mx-auto mb-4" />
-              <h4 className="text-lg font-bold text-white mb-2 tracking-wide">UNKNOWN OUTCOMES</h4>
-              <p className="text-gray-400 text-sm">Evolution results are governed by quantum randomness</p>
-            </div>
-            <div className="p-6 bg-gray-900/50 border border-purple-400/30 rounded-xl">
-              <Users className="w-8 h-8 text-purple-400 mx-auto mb-4" />
-              <h4 className="text-lg font-bold text-white mb-2 tracking-wide">RESEARCH PURPOSES</h4>
-              <p className="text-gray-400 text-sm">Participation contributes to ongoing genetic research</p>
-            </div>
-          </div>
+ 
 
           <p className="text-gray-400 text-lg mb-8">
             By entering the laboratory, you acknowledge the experimental nature of this technology and accept full

@@ -114,7 +114,7 @@ const SudozCard = ({ item }: { item: SudozItem }) => (
   <Dialog>
     <DialogTrigger asChild>
       <Card className="bg-gray-900/80 border-gray-700 cursor-pointer transition-all duration-300 hover:border-green-400/50 hover:shadow-lg hover:shadow-green-400/10 hover:scale-105">
-        <CardContent className="p-1.5 md:p-4">
+        <CardContent className="p-1 md:p-4">
           <div className="aspect-square mb-1 md:mb-3 relative overflow-hidden rounded-lg">
             <Image
               src={item.image || "/placeholder.svg"}
@@ -300,6 +300,33 @@ export default function Collection() {
             <div className="text-gray-400 text-[8px] md:text-lg tracking-wide">NO ARTIFACTS FOUND MATCHING YOUR CRITERIA.</div>
           </div>
         )}
+
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-8 md:mb-20">
+            <h2 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-8 tracking-wider">THE SPECIMEN COLLECTION</h2>
+            <p className="text-sm md:text-xl text-gray-300 max-w-xs md:max-w-4xl mx-auto leading-relaxed">
+              5,555 unique digital life forms await evolution. Each specimen contains distinct genetic markers and
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-16">
+            <Card className="bg-gray-900/80 border-gray-700 text-center p-3 md:p-6">
+              <div className="text-base md:text-4xl font-bold text-green-400 tracking-wider mb-1 md:mb-2">5,555</div>
+              <div className="text-sm md:text-base text-gray-400 tracking-wider">Total Supply</div>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Link href="/collection">
+              <Button
+                size="lg"
+                className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 text-base md:px-10 md:py-4 md:text-lg font-bold rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-purple-500/40 hover:scale-105 tracking-wider"
+              >
+                BROWSE COLLECTION
+              </Button>
+            </Link>
+          </div>
+        </div>
       </main>
     </div>
   )
