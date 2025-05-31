@@ -61,20 +61,8 @@ export default function HomePage() {
         {/* Mobile nav overlay */}
         {navOpen && <div className="fixed inset-0 bg-black z-40 md:hidden" onClick={() => setNavOpen(false)}></div>}
         {/* Nav menu */}
-        <nav className={`fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-green-400 transition-transform duration-300 md:static md:bg-transparent md:flex md:flex-row md:items-center md:justify-end md:space-y-0 md:space-x-8 md:text-base md:font-normal ${navOpen ? 'translate-x-0 bg-black z-50 pointer-events-auto' : '-translate-x-full pointer-events-none'}`}>
+        <nav className={`fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-green-400 transition-transform duration-300 md:static md:bg-transparent md:flex md:flex-row md:items-center md:justify-end md:space-y-0 md:space-x-8 md:text-base md:font-normal ${navOpen ? 'translate-x-0 bg-black z-50 pointer-events-auto' : '-translate-x-full pointer-events-none'} md:translate-x-0 md:pointer-events-auto`}>
           <button onClick={() => setNavOpen(false)} className="absolute top-6 right-6 text-white md:hidden">✕</button>
-          <Link href="/evolve-lab" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
-            EVOLVE LAB
-          </Link>
-          <Link href="/collection" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
-            COLLECTION
-          </Link>
-          <Link href="/vault" className="text-gray-500 pointer-events-none" onClick={() => setNavOpen(false)}>
-            VAULT
-          </Link>
-          <Link href="/docs" className="hover:text-green-300" onClick={() => setNavOpen(false)}>
-            DOCS
-          </Link>
         </nav>
       </header>
 
@@ -140,10 +128,20 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300 px-4 md:px-12 py-3 md:py-6 text-base md:text-xl font-bold rounded-xl transition-all duration-300 hover:scale-105 tracking-wider"
+                    className="w-full border-green-400 text-green-400 hover:bg-green-400/10 hover:text-green-300 px-4 md:px-12 py-3 md:py-6 text-base md:text-xl font-bold rounded-xl transition-all duration-300 hover:scale-105 tracking-wider"
                   >
                     <Sparkles className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
-                    EXPLORE SPECIMENS
+                    VIEW COLLECTION
+                  </Button>
+                </Link>
+                <Link href="/vault" className="block w-full">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300 px-4 md:px-12 py-3 md:py-6 text-base md:text-xl font-bold rounded-xl transition-all duration-300 hover:scale-105 tracking-wider"
+                  >
+                    <Shield className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
+                    ENTER THE VAULT
                   </Button>
                 </Link>
               </div>
