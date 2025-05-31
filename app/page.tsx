@@ -21,6 +21,7 @@ import {
   Wallet,
 } from "lucide-react";
 import WalletConnect from "./components/WalletConnect";
+import CountdownTimer from './components/CountdownTimer';
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
@@ -77,6 +78,9 @@ export default function HomePage() {
             SUDOZ
           </div>
           <div className="flex items-center space-x-4">
+            <div className="hidden md:block">
+              <CountdownTimer />
+            </div>
             <div className="md:hidden">
               <button
                 onClick={() => setNavOpen(!navOpen)}
@@ -111,7 +115,8 @@ export default function HomePage() {
           >
             ✕
           </button>
-          <div className="md:hidden mt-4 flex justify-center">
+          <div className="md:hidden mt-4 flex flex-col items-center space-y-3">
+            <CountdownTimer />
             <WalletConnect />
           </div>
         </nav>
@@ -128,16 +133,17 @@ export default function HomePage() {
         </div>
       )}
 
-      <main className="relative z-10 container mx-auto px-6 py-8">
-        <div className="space-y-8">
+      <main className="relative z-10 container mx-auto px-6 pt-8 pb-4 md:pt-12 md:pb-6">
+        <div className="space-y-6">
+
           {/* Hero Section */}
-          <section className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] px-2 md:px-6 text-center">
-            <div className="mb-6 md:mb-12">
-              <div className="inline-flex items-center px-3 py-1.5 md:px-6 md:py-3 bg-green-400/20 border border-green-400/40 rounded-full text-green-400 text-xs md:text-lg mb-4 md:mb-8 tracking-wider">
+          <section className="relative z-10 flex flex-col items-center justify-center min-h-[40vh] px-2 md:px-6 text-center pt-12 md:pt-16">
+            <div className="mb-4 md:mb-8">
+              <div className="inline-flex items-center px-2.5 py-1 md:px-4 md:py-2 bg-green-400/20 border border-green-400/40 rounded-full text-green-400 text-xs md:text-base mb-3 md:mb-6 tracking-wider">
                 <Beaker className="w-3 h-3 md:w-5 md:h-5 mr-1.5 md:mr-3" />
                 WELCOME TO SUDOZ LABS
               </div>
-              <h1 className="text-3xl md:text-7xl font-bold text-white mb-4 md:mb-8 leading-tight tracking-wider">
+              <h1 className="text-2xl md:text-6xl font-bold text-white mb-3 md:mb-6 leading-tight tracking-wider">
                 <span className="text-glitch" data-text="THE SUDOZ">THE SUDOZ</span>
                 <span className="block text-green-400 relative">
                   <span className="relative inline-block">
@@ -147,7 +153,7 @@ export default function HomePage() {
                   </span>
                 </span>
               </h1>
-              <div className="text-xs md:text-xl text-gray-300 max-w-xs md:max-w-3xl mx-auto mb-6 md:mb-12 leading-relaxed">
+              <div className="text-xs md:text-base text-gray-300 max-w-xs md:max-w-2xl mx-auto mb-4 md:mb-8 leading-relaxed">
                 <div className="typewriter">
                   <div className={`typewriter-line ${activeLine >= 0 ? 'active' : ''}`} style={{position: 'relative', animationDelay: '0s'}}>
                     Deep within the SUDOZ laboratories, a revolutionary breakthrough in quantum digital genetics has emerged.

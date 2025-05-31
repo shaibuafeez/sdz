@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Orbitron } from "next/font/google"
 import "./globals.css"
 import "@mysten/dapp-kit/dist/index.css"
@@ -7,12 +7,16 @@ import ClientProviders from "./providers"
 
 const orbitron = Orbitron({ subsets: ["latin"] })
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: "Sudoz Evolution Lab",
   description: "Evolve your Sudoz NFTs in our experimental sci-fi lab. Level up, enhance, and unlock the true potential of your digital artifacts.",
   keywords: ["NFT", "Evolution", "Digital Art", "Blockchain", "Sudoz"],
   authors: [{ name: "Sudoz Team" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
     type: "website",

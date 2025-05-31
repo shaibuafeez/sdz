@@ -12,14 +12,24 @@ export default function WalletConnect() {
 
   // Add pulsing effect every few seconds to draw attention
   useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    let timeout: NodeJS.Timeout | null = null;
+    
     if (!account) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setIsPulsing(true);
-        setTimeout(() => setIsPulsing(false), 1000);
+        // Clear previous timeout to prevent memory leaks
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => setIsPulsing(false), 1000);
       }, 5000);
-      return () => clearInterval(interval);
     }
-  }, [account]);
+    
+    // Cleanup function to clear all timers
+    return () => {
+      if (interval) clearInterval(interval);
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [account]); // Only re-run if account changes
 
   return (
     <div className="inline-flex items-center justify-end ml-auto">
