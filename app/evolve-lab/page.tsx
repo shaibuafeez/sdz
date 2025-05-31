@@ -249,11 +249,6 @@ export default function EvolveLab() {
                           <p className="text-gray-400 text-xs tracking-wide">
                             LEVEL {selectedArtifact.level}/{selectedArtifact.maxLevel}
                           </p>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <Badge variant="secondary" className="text-xs tracking-wide">
-                              DNA: {selectedArtifact.dnaSequence}
-                            </Badge>
-                          </div>
                         </div>
                       </div>
 
@@ -278,33 +273,36 @@ export default function EvolveLab() {
                   </Card>
 
                   {/* Genetic Data */}
-                  <Card className="bg-gray-900/80 border-gray-700">
+                  <Card className="bg-gray-900/80 border-cyan-400 shadow-lg shadow-cyan-400/20">
                     <CardHeader>
                       <CardTitle className="text-cyan-400 tracking-wider flex items-center">
                         <Dna className="w-5 h-5 mr-2" />
                         GENETIC DATA
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="p-4 space-y-4">
+                      {/* Mutation Probability */}
                       <div>
-                        <div className="text-sm text-gray-400 tracking-wide">MUTATION PROBABILITY</div>
-                        <div className="flex items-center space-x-2">
-                          <Progress value={selectedArtifact.mutationProbability} className="flex-1" />
-                          <span className="text-green-400 font-bold text-sm">
-                            {selectedArtifact.mutationProbability}%
-                          </span>
+                        <div className="flex justify-between text-xs tracking-wide mb-2">
+                          <span className="text-gray-400">MUTATION PROBABILITY</span>
+                          <span className="text-green-400 font-bold">{selectedArtifact.mutationProbability}%</span>
                         </div>
+                        <Progress value={selectedArtifact.mutationProbability} className="w-full" />
                       </div>
-
+                      {/* Trait Modules */}
                       <div>
-                        <div className="text-sm text-gray-400 tracking-wide mb-2">TRAIT MODULES</div>
-                        <div className="flex flex-wrap gap-1">
+                        <div className="text-xs tracking-wide text-gray-400 mb-2">TRAIT MODULES</div>
+                        <div className="flex flex-wrap gap-2">
                           {selectedArtifact.traitModules.map((trait, index) => (
-                            <Badge key={index} variant="secondary" className="text-xs bg-purple-500/20 text-purple-400">
+                            <Badge key={index} variant="secondary" className="bg-purple-500/20 text-purple-400 border-purple-400/30 tracking-wide">
                               {trait}
                             </Badge>
                           ))}
                         </div>
+                      </div>
+                      <div>
+                        <div className="text-xs tracking-wide text-gray-400 mb-2">DNA SEQUENCE</div>
+                        <span className="text-cyan-400 font-mono break-all">{selectedArtifact.dnaSequence}</span>
                       </div>
                     </CardContent>
                   </Card>
