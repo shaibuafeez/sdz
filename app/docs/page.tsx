@@ -66,16 +66,17 @@ export default function Docs() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-gray-300 space-y-4">
-              <p>The Level Up system allows you to enhance your Sudoz artifacts through 10 progressive levels.</p>
+              <p>The Level Up system allows you to enhance your Sudoz artifacts through 10 progressive levels, with each level providing additional points and benefits.</p>
 
               <div className="bg-gray-800/50 p-4 rounded-lg">
                 <h4 className="text-white font-bold mb-2 tracking-wide">HOW IT WORKS:</h4>
                 <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Each level up costs exactly 1 SUI</li>
+                  <li>Each level up costs exactly 1 SUI (total 10 SUI for levels 1-10)</li>
                   <li>Maximum level is 10 for all artifacts</li>
-                  <li>Each upgrade increases rarity and value</li>
+                  <li>Starting at level 0, each artifact has 2 points</li>
+                  <li>Each level gained adds 1 additional point (e.g., level 5 = 7 points)</li>
+                  <li>Points determine number of entries in giveaways</li>
                   <li>Image and metadata update with each level</li>
-                  <li>New attributes may be unlocked</li>
                 </ul>
               </div>
 
@@ -92,25 +93,24 @@ export default function Docs() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-gray-300 space-y-4">
-              <p>The Burn feature is designed for future utility mechanisms and special events.</p>
+              <p>The Burn feature allows you to downgrade your artifacts and receive a partial refund of your level-up costs.</p>
+
+              <div className="bg-gray-800/50 p-4 rounded-lg">
+                <h4 className="text-white font-bold mb-2 tracking-wide">HOW BURNING WORKS:</h4>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                  <li>You can burn any leveled artifact to receive an 80% refund of the SUI spent on leveling</li>
+                  <li>For example, if you leveled to level 5 (cost 5 SUI), you'll receive 4 SUI back (80% of 5)</li>
+                  <li>Burning is useful if you want to downgrade an artifact or recover some of your investment</li>
+                </ul>
+              </div>
 
               <div className="bg-red-400/10 border border-red-400/30 p-4 rounded-lg">
                 <h4 className="text-red-400 font-bold mb-2 tracking-wide">⚠️ IMPORTANT WARNING</h4>
                 <p className="text-sm">
                   Burning an artifact is permanent and irreversible. This action will completely remove the NFT from
-                  your wallet and the blockchain. Only use this feature when participating in official burn events or
-                  mechanisms.
+                  your wallet and the blockchain. You will receive the 80% SUI refund, but the artifact itself will be
+                  destroyed forever.
                 </p>
-              </div>
-
-              <div className="bg-gray-800/50 p-4 rounded-lg">
-                <h4 className="text-white font-bold mb-2 tracking-wide">FUTURE BURN UTILITIES:</h4>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Special event participation</li>
-                  <li>Exclusive reward claiming</li>
-                  <li>Collection evolution mechanics</li>
-                  
-                </ul>
               </div>
             </CardContent>
           </Card>
@@ -226,10 +226,16 @@ export default function Docs() {
            
 
               <div>
+                <h4 className="text-white font-bold mb-2 tracking-wide">HOW DOES THE POINT SYSTEM WORK?</h4>
+                <p className="text-sm">
+                  Each artifact starts with 2 base points at level 0. Every level you gain adds 1 additional point. For example, a level 5 artifact has 7 points (2 base + 5 level points). These points determine your entries in giveaways and other special events.
+                </p>
+              </div>
+
+              <div>
                 <h4 className="text-white font-bold mb-2 tracking-wide">WHAT HAPPENS IF I REACH MAX LEVEL?</h4>
                 <p className="text-sm">
-                  Level 10 artifacts gain special "Mythic" status with unique visual effects and exclusive traits that
-                  cannot be obtained otherwise.
+                  Level 10 artifacts represent the highest evolution state with maximum points (12 points total) and visual enhancements. This gives you the maximum number of entries in giveaways and special events.
                 </p>
               </div>
 
@@ -238,6 +244,13 @@ export default function Docs() {
                 <p className="text-sm">
                   Level ups are safe and guaranteed. The only risk is with the Burn function, which permanently destroys
                   the NFT.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-white font-bold mb-2 tracking-wide">CAN I DOWNGRADE MY ARTIFACTS?</h4>
+                <p className="text-sm">
+                  Yes! You can downgrade your artifacts by using the burn feature. When you burn an artifact, you'll receive 80% of the SUI you spent on leveling it up. However, remember that burning permanently destroys the artifact itself.
                 </p>
               </div>
 
@@ -256,8 +269,8 @@ export default function Docs() {
         <div className="text-center py-12">
           <h2 className="text-3xl font-bold text-white mb-4 tracking-wider">READY TO EVOLVE?</h2>
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Enter the Evolution Lab and start upgrading your Sudoz artifacts today. Unlock new levels of rarity and
-            value in our experimental sci-fi environment.
+            Enter the Evolution Lab and start upgrading your Sudoz artifacts today. Unlock new levels and
+            earn more points in our experimental sci-fi environment.
           </p>
           <Link href="/evolve-lab">
             <Button

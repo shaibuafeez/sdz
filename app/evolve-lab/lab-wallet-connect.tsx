@@ -5,7 +5,7 @@ import { Wallet, ChevronDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 
-export default function WalletConnect() {
+export default function LabWalletConnect() {
   const account = useCurrentAccount();
   const { mutate: disconnect } = useDisconnectWallet();
   const [isPulsing, setIsPulsing] = useState(false);
@@ -22,7 +22,7 @@ export default function WalletConnect() {
   }, [account]);
 
   return (
-    <div className="inline-flex items-center justify-end ml-auto">
+    <div className="inline-block mt-2">
       {!account ? (
         <div className={`px-5 py-2 rounded-xl bg-green-400 text-black text-sm font-bold tracking-widest hover:bg-green-500 transition-all duration-300 flex items-center shadow-lg ${isPulsing ? 'shadow-green-400/60 scale-[1.03]' : 'shadow-green-400/25'} hover:shadow-green-400/40 hover:scale-[1.03] relative overflow-hidden animate-button-glow group`}>
           {isPulsing && (
@@ -53,4 +53,4 @@ export default function WalletConnect() {
       )}
     </div>
   );
-} 
+}

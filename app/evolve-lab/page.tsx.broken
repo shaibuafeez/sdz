@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowLeft, Wallet, Zap, Flame, Dna, Scan, Activity, AlertTriangle, CheckCircle, ArrowUpCircle } from "lucide-react"
 import Image from "next/image"
-import LabWalletConnect from './lab-wallet-connect'
+import WalletConnect from "../components/WalletConnect"
 import { useCurrentAccount } from "@mysten/dapp-kit"
 
 export default function EvolveLab() {
@@ -169,9 +169,9 @@ export default function EvolveLab() {
 
           <div className="flex items-center">
             {!account ? (
-              <LabWalletConnect />
+              <WalletConnect />
             ) : (
-              <LabWalletConnect />
+              <WalletConnect />
             )}
           </div>
         </header>
@@ -199,15 +199,15 @@ export default function EvolveLab() {
 
         <main className="relative z-10 container mx-auto px-6 py-8">
           {!account ? (
-            <div className="flex flex-col items-center text-center pt-16 pb-16">
+            <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
               <div className="w-24 h-24 bg-gray-800/50 rounded-full flex items-center justify-center mb-6">
                 <Wallet className="w-12 h-12 text-gray-400" />
               </div>
               <h2 className="text-3xl font-bold text-white mb-4 tracking-wider">LABORATORY ACCESS REQUIRED</h2>
-              <p className="text-gray-400 mb-4 max-w-md">
+              <p className="text-gray-400 mb-8 max-w-md">
                 Connect your wallet to access the SUDOZ DNA Laboratory and begin genetic evolution protocols.
               </p>
-              <LabWalletConnect />
+              <WalletConnect />
             </div>
           ) : (
             <div className="space-y-8">
@@ -381,17 +381,32 @@ export default function EvolveLab() {
                                   className="border-red-400/50 text-red-400 hover:bg-red-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
                                 >
                                   <Flame className="w-5 h-5 mr-2" />
-                                  BURN SYSTEM
+                                  TRIGGER REBIRTH PROTOCOL
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Burn your artifact to receive an 80% refund of SUI spent on leveling</p>
-                                <p className="text-red-400">Warning: This permanently destroys your artifact</p>
+                                <div className="space-y-2 max-w-xs">
+                                  <p className="font-bold text-red-400">⚠️ EXPERIMENTAL: BURN WARNING</p>
+                                  <p>Burning is IRREVERSIBLE and will permanently destroy your artifact</p>
+                                  <p>Only 80% of SUI spent on leveling will be refunded</p>
+                                </div>
                               </TooltipContent>
                             </Tooltip>
-
-                            <Tooltip>
-                              <TooltipTrigger asChild>
+                          </div>
+                          
+                          {/* Add prominent burn warning banner */}
+                          <div className="mt-6 p-4 bg-red-400/20 border-2 border-red-400/40 rounded-xl">
+                            <div className="flex items-center space-x-3 mb-2">
+                              <AlertTriangle className="w-6 h-6 text-red-400 flex-shrink-0" />
+                              <h3 className="text-red-400 font-bold tracking-wider text-lg">EXPERIMENTAL: BURN WARNING</h3>
+                            </div>
+                            <div className="text-white space-y-2 ml-9">
+                              <p>• Burning is <span className="font-bold text-red-400">IRREVERSIBLE</span> and will permanently destroy your artifact</p>
+                              <p>• Only <span className="font-bold text-yellow-400">80% of SUI</span> spent on leveling will be refunded</p>
+                              <p>• This feature is experimental and should be used with caution</p>
+                            </div>
+                          </div>
+                        </div>
                                 <Button
                                   onClick={handleMaxLevelUpgrade}
                                   disabled={isLoading}
@@ -413,7 +428,10 @@ export default function EvolveLab() {
                             <p>• Artifacts can evolve up to level 10</p>
                             <p>• Each level adds 1 point to your artifact (max 12 points at level 10)</p>
                             <p>• Evolution costs 1 SUI per level (10 SUI total)</p>
-                            <p>• Burning refunds 80% of SUI spent but destroys the artifact</p>
+                          </div>
+                          <div className="mt-3 p-3 bg-red-900/30 border border-red-500/50 rounded-lg">
+                            <p className="text-red-400 font-medium text-sm mb-1">⚠️ EXPERIMENTAL BURN SYSTEM</p>
+                            <p className="text-xs text-gray-300">Burning is irreversible and only refunds 80% of SUI spent on leveling. Once burned, your artifact is permanently destroyed and cannot be recovered.</p>
                           </div>
                         </div>
                       )}

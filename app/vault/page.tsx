@@ -31,7 +31,7 @@ const VaultPage = () => {
           THE VAULT
         </h1>
         <p className="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl text-center">
-          Welcome to <span className="text-green-400 font-bold">The Vault</span>. Unlock exclusive events, raffles, and high-stakes sacrifices for SUDOZ holders.
+          Welcome to <span className="text-green-400 font-bold">The Vault</span>. Unlock exclusive events, raffles, and high-stakes opportunities for SUDOZ artifact owners.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl">
@@ -39,7 +39,7 @@ const VaultPage = () => {
           <div className="bg-gradient-to-br from-green-900/60 to-gray-900/80 border-2 border-green-400/30 rounded-2xl p-6 shadow-lg hover:shadow-green-400/30 transition-all duration-300 group relative overflow-hidden">
             <Gift className="w-12 h-12 text-green-400 mb-4 mx-auto animate-bounce" />
             <h2 className="text-xl md:text-2xl font-bold text-green-300 mb-2 tracking-wide text-center">Holder Giveaways</h2>
-            <p className="text-gray-300 text-center mb-4">Participate in exclusive giveaways for SUDOZ holders. Prizes, NFTs, and more await!</p>
+            <p className="text-gray-300 text-center mb-4">Participate in exclusive giveaways for SUDOZ artifact owners. Higher level artifacts earn more entries with their points!</p>
             <Link href="/vault/giveaway">
               <Button className="w-full bg-green-500/80 hover:bg-green-400 text-black font-bold shadow-green-400/30 shadow-md animate-glow">Enter Giveaway</Button>
             </Link>
@@ -50,7 +50,7 @@ const VaultPage = () => {
           <div className="bg-gradient-to-br from-purple-900/60 to-gray-900/80 border-2 border-purple-400/30 rounded-2xl p-6 shadow-lg hover:shadow-purple-400/30 transition-all duration-300 group relative overflow-hidden">
             <Ticket className="w-12 h-12 text-purple-400 mb-4 mx-auto animate-bounce" />
             <h2 className="text-xl md:text-2xl font-bold text-purple-300 mb-2 tracking-wide text-center">Raffles</h2>
-            <p className="text-gray-300 text-center mb-4">Enter raffles for a chance to win rare SUDOZ artifacts and other rewards.</p>
+            <p className="text-gray-300 text-center mb-4">Enter raffles for a chance to win SUDOZ artifacts and other rewards. Each artifact point gives you one entry!</p>
             <Link href="/vault/raffle">
               <Button className="w-full bg-purple-500/80 hover:bg-purple-400 text-white font-bold shadow-purple-400/30 shadow-md animate-glow">Enter Raffle</Button>
             </Link>
@@ -60,10 +60,10 @@ const VaultPage = () => {
           {/* Sacrifice System (Burn & Chances) */}
           <div className="bg-gradient-to-br from-red-900/60 to-gray-900/80 border-2 border-red-400/30 rounded-2xl p-6 shadow-lg hover:shadow-red-400/30 transition-all duration-300 group relative overflow-hidden">
             <Flame className="w-12 h-12 text-red-400 mb-4 mx-auto animate-bounce" />
-            <h2 className="text-xl md:text-2xl font-bold text-red-300 mb-2 tracking-wide text-center">Sacrifice System</h2>
-            <p className="text-gray-300 text-center mb-4">Burn your SUDOZ for a chance at legendary rewards. High risk, high reward!</p>
+            <h2 className="text-xl md:text-2xl font-bold text-red-300 mb-2 tracking-wide text-center">Burn System</h2>
+            <p className="text-gray-300 text-center mb-4">Burn your SUDOZ artifacts to receive an 80% refund of your leveling costs. Remember, burning is permanent!</p>
             <Link href="/vault/burn">
-              <Button className="w-full bg-red-500/80 hover:bg-red-400 text-white font-bold shadow-red-400/30 shadow-md animate-glow">Burn for a Chance</Button>
+              <Button className="w-full bg-red-500/80 hover:bg-red-400 text-white font-bold shadow-red-400/30 shadow-md animate-glow">Burn for Refund</Button>
             </Link>
             <div className="absolute top-1/2 right-0 w-24 h-24 bg-red-400/10 rounded-full blur-2xl animate-pulse" />
           </div>
