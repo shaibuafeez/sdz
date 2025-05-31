@@ -80,40 +80,33 @@ export default function EvolveLab() {
   ]
 
   const handleStartEvolution = () => {
-    if (selectedArtifact.level + pendingMutations < selectedArtifact.maxLevel) {
-      setPendingMutations(pendingMutations + 1)
-    }
-  }
-
-  const handleApplyMutation = () => {
-    if (pendingMutations > 0 && selectedArtifact.level < selectedArtifact.maxLevel) {
-      setIsLoading(true)
-      let messageIndex = 0
+    if (selectedArtifact.level < selectedArtifact.maxLevel) {
+      setIsLoading(true);
+      let messageIndex = 0;
       const messageInterval = setInterval(() => {
         if (messageIndex < loadingMessages.length) {
-          setLoadingMessage(loadingMessages[messageIndex])
-          messageIndex++
+          setLoadingMessage(loadingMessages[messageIndex]);
+          messageIndex++;
         }
-      }, 800)
+      }, 800);
       setTimeout(() => {
-        clearInterval(messageInterval)
-        setIsLoading(false)
-        setPendingMutations(pendingMutations - 1)
+        clearInterval(messageInterval);
+        setIsLoading(false);
         const updatedArtifact = {
           ...selectedArtifact,
           level: Math.min(selectedArtifact.level + 1, selectedArtifact.maxLevel),
           currentValue: selectedArtifact.currentValue + 2,
           rarity: selectedArtifact.rarity + 1,
           mutationProbability: Math.floor(Math.random() * 100) + 1,
-        }
-        setSelectedArtifact(updatedArtifact)
-        const randomSuccess = successMessages[Math.floor(Math.random() * successMessages.length)]
-        setSuccessMessage(`${randomSuccess} – Artifact Now Level ${updatedArtifact.level}`)
-        setShowSuccess(true)
-        setTimeout(() => setShowSuccess(false), 4000)
-      }, 6000)
+        };
+        setSelectedArtifact(updatedArtifact);
+        const randomSuccess = successMessages[Math.floor(Math.random() * successMessages.length)];
+        setSuccessMessage(`${randomSuccess} – Artifact Now Level ${updatedArtifact.level}`);
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 4000);
+      }, 6000);
     }
-  }
+  };
 
   const handleScanArtifact = () => {
     setIsLoading(true)
@@ -172,16 +165,15 @@ export default function EvolveLab() {
                 BACK
               </Button>
             </Link>
-            <div className="text-2xl font-bold text-green-400 tracking-wider">SUDOZ DNA LAB</div>
           </div>
 
-          {!account ? (
-            <WalletConnect />
-          ) : (
-            <Badge variant="secondary" className="bg-green-400/20 text-green-400 border-green-400/30 tracking-wide">
-              LAB ACCESS GRANTED
-            </Badge>
-          )}
+          <div className="flex items-center">
+            {!account ? (
+              <WalletConnect />
+            ) : (
+              <WalletConnect />
+            )}
+          </div>
         </header>
 
         {/* Loading Overlay */}
@@ -271,41 +263,6 @@ export default function EvolveLab() {
                       </Button>
                     </CardContent>
                   </Card>
-
-                  {/* Genetic Data */}
-                  <Card className="bg-gray-900/80 border-cyan-400 shadow-lg shadow-cyan-400/20">
-                    <CardHeader>
-                      <CardTitle className="text-cyan-400 tracking-wider flex items-center">
-                        <Dna className="w-5 h-5 mr-2" />
-                        GENETIC DATA
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 space-y-4">
-                      {/* Mutation Probability */}
-                      <div>
-                        <div className="flex justify-between text-xs tracking-wide mb-2">
-                          <span className="text-gray-400">MUTATION PROBABILITY</span>
-                          <span className="text-green-400 font-bold">{selectedArtifact.mutationProbability}%</span>
-                        </div>
-                        <Progress value={selectedArtifact.mutationProbability} className="w-full" />
-                      </div>
-                      {/* Trait Modules */}
-                      <div>
-                        <div className="text-xs tracking-wide text-gray-400 mb-2">TRAIT MODULES</div>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedArtifact.traitModules.map((trait, index) => (
-                            <Badge key={index} variant="secondary" className="bg-purple-500/20 text-purple-400 border-purple-400/30 tracking-wide">
-                              {trait}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-xs tracking-wide text-gray-400 mb-2">DNA SEQUENCE</div>
-                        <span className="text-cyan-400 font-mono break-all">{selectedArtifact.dnaSequence}</span>
-                      </div>
-                    </CardContent>
-                  </Card>
                 </div>
 
                 {/* Experimental Chamber */}
@@ -336,7 +293,7 @@ export default function EvolveLab() {
                         </div>
 
                         {/* Stats Grid */}
-                        <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className="grid grid-cols-2 gap-4 mb-6 max-w-sm mx-auto">
                           <div className="text-center p-3 bg-gray-800/50 rounded-lg">
                             <div className="text-xl font-bold text-white tracking-wider">
                               {selectedArtifact.level}/{selectedArtifact.maxLevel}
@@ -348,10 +305,6 @@ export default function EvolveLab() {
                               {selectedArtifact.currentValue}
                             </div>
                             <div className="text-gray-400 text-xs tracking-wider">GENETIC VALUE</div>
-                          </div>
-                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
-                            <div className="text-xl font-bold text-white tracking-wider">{selectedArtifact.rarity}</div>
-                            <div className="text-gray-400 text-xs tracking-wider">RARITY INDEX</div>
                           </div>
                         </div>
                       </div>
@@ -404,7 +357,7 @@ export default function EvolveLab() {
                               <TooltipTrigger asChild>
                                 <Button
                                   onClick={handleStartEvolution}
-                                  disabled={isLoading || selectedArtifact.level + pendingMutations >= selectedArtifact.maxLevel}
+                                  disabled={isLoading || selectedArtifact.level >= selectedArtifact.maxLevel}
                                   size="lg"
                                   className="bg-green-400 hover:bg-green-500 text-black px-6 py-4 rounded-xl font-bold tracking-wider"
                                 >
@@ -415,30 +368,6 @@ export default function EvolveLab() {
                               <TooltipContent>
                                 <p>Evolution costs 1 SUI per level</p>
                                 <p>Each level grants a new mysterious trait</p>
-                              </TooltipContent>
-                            </Tooltip>
-
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  onClick={handleApplyMutation}
-                                  disabled={isLoading || pendingMutations === 0}
-                                  variant="outline"
-                                  size="lg"
-                                  className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 px-6 py-4 rounded-xl font-bold tracking-wider relative"
-                                >
-                                  <Dna className="w-5 h-5 mr-2" />
-                                  APPLY MUTATION
-                                  {pendingMutations > 0 && (
-                                    <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-bold bg-purple-500 text-white animate-pulse">
-                                      {pendingMutations}
-                                    </span>
-                                  )}
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Randomness governs the trait outcome</p>
-                                <p>Artifacts can evolve up to level 10</p>
                               </TooltipContent>
                             </Tooltip>
 
@@ -470,12 +399,11 @@ export default function EvolveLab() {
                                   className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 px-6 py-4 rounded-xl font-bold tracking-wider"
                                 >
                                   <ArrowUpCircle className="w-5 h-5 mr-2" />
-                                  MAX LEVEL UPGRADE
+                                  INSTANT MAX LEVEL UPGRADE
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Instantly upgrade your artifact to level 10</p>
-                                <p>Costs may apply</p>
+                                <p>Instantly upgrades artifact to level 10 for demo purposes.</p>
                               </TooltipContent>
                             </Tooltip>
                           </div>
